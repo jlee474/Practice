@@ -38,7 +38,7 @@ while True:
    if counter % 100000 == 0:
       print(f"Total random \"tickets\" purchased is {(counter / 1000):,.0f}K. Elapsed time is {get_elapsed_time():,.2f} seconds")
 
-   if counter == 1000000000:
+   if counter == 999999999:
       print(f'max iterations reached of {counter:,}')
       break
    elif playerDraw == winning_numbers:
