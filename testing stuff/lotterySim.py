@@ -9,45 +9,54 @@ os.system('cls') # 'cls' for Windows. 'clear' for macOS and Linux
 def get_elapsed_time():
    return time.time() - start_time
 
-# Define the range of numbers from which to draw
-start_range = 1
-end_range = 69
+def runSim(counter):
+    while True:
+        playerDraw = random.sample(range(start_range,end_range + 1), 5)
+        playerDraw = sorted(playerDraw)
+        playerRed = random.randint(1, 26)
+        playerDraw.append(playerRed)  # the red Powerball
 
-# Define the winning numbers
-winning_numbers = random.sample(range(start_range, end_range + 1), 5)
-red = random.randint(1, 26)
-winning_numbers = sorted(winning_numbers)
-winning_numbers.append(red)
-#
-winning_numbers = [1,2,3,4,5,6] # just for curiosity, override winning numbers to chronological sequence
-print(f'The winning numbers to match are {winning_numbers}')
+        # for every 100,000 iterations
+        if counter % 1000000 == 0:
+            print(f"Total random \"tickets\" purchased is {(counter / 1000):,.0f}K. Elapsed time is {get_elapsed_time():,.2f} seconds")
+
+        if counter == 999999999:
+            print(f'max iterations reached of {counter:,}')
+            break
+        elif playerDraw == winning_numbers:
+            print(f"There's a winner!")
+            print(f"Player's draw was {playerDraw}")
+            print(f"The winning numbers were {winning_numbers}")
+            print(f"It took {counter:,.0f} tries")
+            break
+        counter += 1
 
 
-# Now for the player draws 
-counter = 1
-start_time = time.time() # start timer for the simulation
+if __name__ == "__main__":
+
+    # Define the range of numbers from which to draw
+    global start_range
+    global end_range
+    start_range = 1
+    end_range = 69
+
+    # Define the winning numbers
+    winning_numbers = random.sample(range(start_range, end_range + 1), 5)
+    red = random.randint(1, 26)
+    winning_numbers = sorted(winning_numbers)
+    winning_numbers.append(red)
+
+    ###
+    winning_numbers = [1,2,3,4,5,6] # just for curiosity, override winning numbers to chronological sequence
+    ###
+    
+    print(f'The winning numbers to match are {winning_numbers}')
+    counter = 1
+    start_time = time.time() # start timer for the simulation
+    runSim(counter)
 
 
-while True:
-   playerDraw = random.sample(range(start_range,end_range + 1), 5)
-   playerDraw = sorted(playerDraw)
-   playerRed = random.randint(1, 26)
-   playerDraw.append(playerRed)  # the red Powerball
 
-   # for every 100,000 iterations
-   if counter % 100000 == 0:
-      print(f"Total random \"tickets\" purchased is {(counter / 1000):,.0f}K. Elapsed time is {get_elapsed_time():,.2f} seconds")
-
-   if counter == 999999999:
-      print(f'max iterations reached of {counter:,}')
-      break
-   elif playerDraw == winning_numbers:
-      print(f"There's a winner!")
-      print(f"Player's draw was {playerDraw}")
-      print(f"The winning numbers were {winning_numbers}")
-      print(f"It took {counter:,.0f} tries")
-      break
-   counter += 1
 
 
 
